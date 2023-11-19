@@ -7,22 +7,12 @@ on:
         required: true
         type: string
 
-permissions:
-  id-token: write
-  contents: read
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environmentName }}
 
     steps:
-      - uses: actions/checkout@v3
-        name: Checkout code
-
-      - name: Install .NET
-        uses: actions/setup-dotnet@v3
-
       - if: inputs.environmentName == 'Development'
         uses: ./.github/workflows/ftp.yml
         with:
