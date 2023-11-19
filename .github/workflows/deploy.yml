@@ -31,3 +31,4 @@ jobs:
           password: ${{secrets.PASSWORD}}
           localpath: ${{secrets.LOCALPATH}}
           remotepath: ${{secrets.REMOTEPATH}}
+          environmentName: ${{inputs.environmentName}}
