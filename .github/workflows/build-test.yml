@@ -5,6 +5,9 @@ on:
     branches: ["master", "Dev"]
   pull_request:
     branches: ["master", "Dev"]
+env:
+  OUTPUT_PATH: ./Base.Api/bin/Release/net6.0/
+  DLL_PATH: ./Base.Api/bin/Release/net6.0/Base.Api.dll
 
 jobs:
   build:
