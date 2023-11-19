@@ -8,17 +8,14 @@ on:
         type: string
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    environment: ${{ inputs.environmentName }}
-
-    steps:
-      - if: inputs.environmentName == 'Development'
-        uses: ./.github/workflows/ftp.yml
-        with:
-          server_ip: ${{secrets.SERVER_IP}}
-          username: ${{secrets.USERNAME}}
-          password: ${{secrets.PASSWORD}}
-          localpath: ${{secrets.LOCALPATH}}
-          remotepath: ${{secrets.REMOTEPATH}}
-          environmentName: ${{inputs.environmentName}}
+  deploy-development:
+    if: inputs.environmentName == 'Development'
+    secrets: inherit
+    uses: ./.github/workflows/ftp.yml
+    with:
+      server_ip: ${{secrets.SERVER_IP}}
+      username: ${{secrets.USERNAME}}
+      password: ${{secrets.PASSWORD}}
+      localpath: ${{secrets.LOCALPATH}}
+      remotepath: ${{secrets.REMOTEPATH}}
+      environmentName: ${{inputs.environmentName}}
