@@ -13,9 +13,6 @@ jobs:
     environment: ${{ inputs.environmentName }}
     
     steps:
-      - name: ping Server
-        run: ping ${{secrets.SERVER_IP}}
-
       - name: Get latest code
         uses: actions/checkout@v3
 
