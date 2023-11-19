@@ -24,7 +24,7 @@ jobs:
         uses: actions/setup-dotnet@v3
 
       - if: inputs.environmentName == 'Development'
-        uses: ./.github/workflows/ftp.yml
+        uses: /.github/workflows/ftp.yml
         with:
           server_ip: ${{secrets.SERVER_IP}}
           username: ${{secrets.USERNAME}}
