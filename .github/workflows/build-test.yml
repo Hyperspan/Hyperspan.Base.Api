@@ -33,4 +33,4 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: ./deploy.yml
+      - uses: ./.github/workflows/deploy.yml
