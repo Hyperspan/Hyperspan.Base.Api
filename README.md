@@ -1,6 +1,6 @@
 # Clean Architecture Solution Template
 
-[![Build](https://github.com/Hyperspan/Hyperspan.Base.Api/actions/workflows/build.yml/badge.svg)](https://github.com/Hyperspan/Hyperspan.Base.Api/actions/workflows/build.yml)
+[![Build](https://github.com/Hyperspan/Hyperspan.Base.Api/actions/workflows/build-test.yml/badge.svg)](https://github.com/Hyperspan/Hyperspan.Base.Api/actions/workflows/build-test.yml)
 [![Nuget](https://img.shields.io/nuget/v/Hyperspan.Api?label=NuGet)](https://www.nuget.org/packages/Hyperspan.Api)
 [![Nuget](https://img.shields.io/nuget/dt/Hyperspan.Api?label=Downloads)](https://www.nuget.org/packages/Hyperspan.Api)
 
