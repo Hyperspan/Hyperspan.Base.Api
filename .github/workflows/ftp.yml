@@ -1,0 +1,47 @@
+name: FTP to server
+
+on:
+  workflow_call:
+    inputs:
+      server_ip:
+        required: true
+        type: string
+
+      username:
+        required: true
+        type: string
+
+      password:
+        required: true
+        type: string
+
+      localpath:
+        required: true
+        type: string
+
+      remotepath:
+        required: true
+        type: string
+
+      environmentName:
+        required: true
+        type: string
+
+jobs:
+  ftp:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ping Server
+        run: ping ${{ inputs.server_ip }}
+
+      - name: Get latest code
+        uses: actions/checkout@v3
+
+      - name: ftp-action
+        uses: sebastianpopp/ftp-action@v2.0.0
+        with:
+          host: ${{ inputs.server_ip }}
+          user: ${{ inputs.username }}
+          password: ${{ inputs.password }}
+          localDir: ${{ inputs.localpath }}
+          remoteDir: ${{ inputs.remotepath }}

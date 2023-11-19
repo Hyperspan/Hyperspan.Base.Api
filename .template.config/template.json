@@ -1,0 +1,75 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Hyperspan",
+    "classifications": [
+        "Web",
+        "ASP.NET",
+        "Clean Architecture",
+        "Hyperspan",
+        "Api",
+        "Postgresql"
+    ],
+    "name": "Base API",
+    "description": "Project template for API with basic authentication and authorization.",
+    "identity": "Hyperspan.Base.Api",
+    "groupIdentity": "Hyperspan.Base.Api",
+    "shortName": "Base.Api",
+    "tags": {
+        "language": "C#",
+        "type": "project"
+    },
+    "sourceName": "Base.Api",
+    "preferNameDirectory": true,
+    "symbols": {
+        "Database": {
+            "type": "parameter",
+            "datatype": "choice",
+            "choices": [
+                {
+                    "choice": "Postgres",
+                    "description": "Use Postgres Sql"
+                },
+                {
+                    "choice": "MySQL",
+                    "description": "Use MySQL"
+                },
+                {
+                    "choice": "None",
+                    "description": "Do not configure database."
+                }
+            ],
+            "defaultValue": "Postgres",
+            "description": "The type of database engine to use"
+        },
+        "UsePostgres": {
+            "type": "computed",
+            "value": "(Database == \"Postgres\")"
+        },
+        "UseMySQL": {
+            "type": "computed",
+            "value": "(Database == \"MySQL\")"
+        },
+        "UseNone": {
+            "type": "computed",
+            "value": "(Database == \"None\")"
+        }
+    },
+    "sources": [
+        {
+            "source": "./",
+            "target": "./",
+            "exclude": [
+                ".template.config/**/*",
+                "templates/**/*",
+                "**/*.filelist",
+                "**/*.user",
+                "**/*.lock.json",
+                "*.nuspec",
+                "*.sln"
+            ],
+            "rename": {
+                "README-template.md": "README.md"
+            }
+        }
+    ]
+}

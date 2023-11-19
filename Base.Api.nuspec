@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+	<metadata>
+		<id>
+			Hyperspan.Base.Api
+		</id>
+		<version>
+			1.0.0
+		</version>
+		<title>
+			Base API
+		</title>
+		<authors>
+			Hyperspan
+		</authors>
+		<description>
+			Project template for API with basic authentication and authorization.
+		</description>
+		<summary>
+			Project template for API with basic authentication and authorization.
+		</summary>
+		<releaseNotes>
+			What's new:
+				- Controller classes, Database Entities for User and Role management
+				- Postgres Support added
+		</releaseNotes>
+		<projectUrl>
+			https://github.com/Hyperspan/Hyperspan.Base.Api
+		</projectUrl>
+		<repository type="git" url="https://github.com/Hyperspan/Hyperspan.Base.Api.git" branch="master" />
+		<license type="expression">
+			MIT
+		</license>
+		<requireLicenseAcceptance>
+			false
+		</requireLicenseAcceptance>
+		<tags>
+			clean-architecture project template csharp dotnet basic-auth auth hyperspan
+		</tags>
+		<icon>
+			icon.png
+		</icon>
+		<readme>
+			README.md
+		</readme>
+		<packageTypes>
+			<packageType name="Template" />
+		</packageTypes>
+	</metadata>
+	<files>
+		<file src=".template.config\icon.png" />
+		<file src="README.md" />
+		<file src=".\**" target="content" exclude="**\node_modules\**;**\bin\**;**\obj\**;.\.vs\**;.\.vscode\**;**\ClientApp\dist\**;**\wwwroot\dist\**;content\Directory.Build.*;.\.git\**;.\.github\workflows\package.yml;.\.github\workflows\codeql.yml;.\.github\ISSUE_TEMPLATE\**;.\.github\icon.png;.\CODE_OF_CONDUCT.md;.\LICENSE;.\README.md;" />
+	</files>
+</package>
