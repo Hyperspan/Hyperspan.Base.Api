@@ -8,8 +8,7 @@ on:
         type: string
 
 jobs:
-  deploy-development:
-    if: inputs.environmentName == 'Development'
+  deploy:
     secrets: inherit
     uses: ./.github/workflows/ftp.yml
     with:

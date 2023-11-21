@@ -5,7 +5,7 @@
 			Hyperspan.Api
 		</id>
 		<version>
-			1.0.0
+			1.1.1
 		</version>
 		<title>
 			Base API
@@ -21,8 +21,8 @@
 		</summary>
 		<releaseNotes>
 			What's new:
-				- Controller classes, Database Entities for User and Role management
-				- Postgres Support added
+			- Controller classes, Database Entities for User and Role management
+			- Postgres Support added
 		</releaseNotes>
 		<projectUrl>
 			https://github.com/Hyperspan/Hyperspan.Base.Api

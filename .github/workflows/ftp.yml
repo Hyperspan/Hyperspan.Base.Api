@@ -9,7 +9,7 @@ on:
 
 jobs:
   ftp:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     environment: ${{ inputs.environmentName }}
 
     steps:
@@ -22,5 +22,4 @@ jobs:
           name: build
           path: ${{secrets.LOCALPATH}}
 
-      - name: scp all files and folders
-        run: sudo cp -r ${{secrets.LOCALPATH}} ${{secrets.REMOTEPATH}}
+      # FTP Files to your desired server
