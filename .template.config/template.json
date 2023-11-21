@@ -9,16 +9,16 @@
         "Api",
         "Postgresql"
     ],
-    "name": "Base API",
+    "name": "Hyperspan Base API",
     "description": "Project template for API with basic authentication and authorization.",
-    "identity": "Hyperspan.Base.Api",
-    "groupIdentity": "Hyperspan.Base.Api",
-    "shortName": "Base.Api",
+    "identity": "Hyperspan.Api",
+    "groupIdentity": "Hyperspan.Api",
+    "shortName": "Hyperspan.Api",
     "tags": {
         "language": "C#",
         "type": "project"
     },
-    "sourceName": "Base.Api",
+    "sourceName": "Hyperspan",
     "preferNameDirectory": true,
     "symbols": {
         "Database": {
@@ -28,15 +28,16 @@
                 {
                     "choice": "Postgres",
                     "description": "Use Postgres Sql"
-                },
-                {
-                    "choice": "MySQL",
-                    "description": "Use MySQL"
-                },
-                {
-                    "choice": "None",
-                    "description": "Do not configure database."
                 }
+                // ,
+                // {
+                //     "choice": "MySQL",
+                //     "description": "Use MySQL"
+                // },
+                // {
+                //     "choice": "None",
+                //     "description": "Do not configure database."
+                // }
             ],
             "defaultValue": "Postgres",
             "description": "The type of database engine to use"
@@ -44,19 +45,20 @@
         "UsePostgres": {
             "type": "computed",
             "value": "(Database == \"Postgres\")"
-        },
-        "UseMySQL": {
-            "type": "computed",
-            "value": "(Database == \"MySQL\")"
-        },
-        "UseNone": {
-            "type": "computed",
-            "value": "(Database == \"None\")"
         }
+        // ,
+        // "UseMySQL": {
+        //     "type": "computed",
+        //     "value": "(Database == \"MySQL\")"
+        // },
+        // "UseNone": {
+        //     "type": "computed",
+        //     "value": "(Database == \"None\")"
+        // }
     },
     "sources": [
         {
-            "source": "./",
+            "source": "./src",
             "target": "./",
             "exclude": [
                 ".template.config/**/*",
@@ -65,11 +67,19 @@
                 "**/*.user",
                 "**/*.lock.json",
                 "*.nuspec",
-                "*.sln"
+                "*.sln",
+                "*.exe"
             ],
             "rename": {
                 "README-template.md": "README.md"
             }
+        },
+        {
+            "source": "./.github",
+            "target": "../.github",
+            "exclude": [
+                "package.yml"
+            ]
         }
     ]
 }
