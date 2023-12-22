@@ -22,7 +22,7 @@ jobs:
           dotnet-version: 6.0.x
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: cd ./Backend && dotnet restore
 
       - name: Build
         run: dotnet build -c=Release --no-restore

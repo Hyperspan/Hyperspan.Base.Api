@@ -12,8 +12,8 @@ If you find this project useful, please give it a star. Thanks! ⭐
 
 The easiest way to get started is to install the [.NET template](https://www.nuget.org/packages/Hyperspan.Api):
 
-```
-dotnet new install Hyperspan.Api::1.0.0
+```bash
+dotnet new install Hyperspan.Api
 ```
 
 Once installed, create a new solution using the template. You can choose to use Postgres, MySQL, or create a Web API-only solution. Specify the client framework using the `-D` or `--database` option, and provide the output directory where your project will be created. Here are some examples:
@@ -21,13 +21,13 @@ Once installed, create a new solution using the template. You can choose to use 
 To create a Web API with Postgres(Default), .NET Core and Hyperspan.Api:
 
 ```bash
-dotnet new Base.Api --output YourProjectName
+dotnet new Hyperspan.Api --output YourProjectName
 ```
 
 To create a Web API with MySQL, .NET Core and Hyperspan.Api:
 
 ```bash
-dotnet new Base.Api --output YourProjectName -D MySQL
+dotnet new Hyperspan.Api --output YourProjectName -D MySQL
 ```
 
 Launch the app:
@@ -48,7 +48,7 @@ dotnet new Hyperspan.Api --help
 The template is configured to use Postgres by default. If you would prefer to use MySQL, create your solution using the following command:
 
 ```bash
-dotnet new Base.Api --output YourProjectName -D MySQL
+dotnet new Hyperspan.Api --output YourProjectName -D MySQL
 ```
 
 When you run the application the database will be automatically created (if necessary) and the latest migrations will be applied.
