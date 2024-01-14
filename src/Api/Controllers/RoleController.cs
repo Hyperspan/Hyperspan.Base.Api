@@ -1,23 +1,22 @@
-﻿using Hyperspan.Auth.Domain.DatabaseModals;
-using Hyperspan.Auth.Shared.Requests;
-using Hyperspan.Base.Interfaces;
-using Hyperspan.Shared.Modals;
+﻿using Domain.Entities;
+using Infrastructure.Interfaces.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Modals;
+using Shared.Requests.Users;
 
-namespace Base.Api.Controllers
+namespace Api.Controllers
 {
     [ApiController]
     [Route("api/account/roles")]
     public class RoleController : ControllerBase
     {
         private readonly IRoleService _roleService;
-
         public RoleController(IRoleService roleService)
         {
             _roleService = roleService;
         }
-
+        
         //[HttpPost]
         //public async Task<ApiResponseModal> CreateRoleAsync(CreateRoleRequest request)
         //    => await _roleService.CreateRoleAsync(request);

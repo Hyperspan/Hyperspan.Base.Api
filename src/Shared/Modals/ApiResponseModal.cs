@@ -1,4 +1,6 @@
-﻿namespace Hyperspan.Shared.Modals
+﻿using Serilog;
+
+namespace Shared.Modals
 {
     public class ApiResponseModal
     {
@@ -6,45 +8,53 @@
         public string? Message { get; internal set; }
         public bool Succeeded { get; internal set; }
 
-        public ApiResponseModal(bool succeeded, string? errorCode = null)
+        protected ApiResponseModal(bool succeeded, string? errorCode = null)
         {
             Succeeded = succeeded;
             ErrorCode = errorCode;
-
-            // TODO: Get Message for the error code provided.
+            if (errorCode == null) return;
+            new BaseErrorCodes().ErrorMessages.TryGetValue(errorCode, out var message);
+            Message = message;
         }
 
         public static async Task<ApiResponseModal> SuccessAsync()
             => await Task.FromResult(new ApiResponseModal(true));
 
-        public static async Task<ApiResponseModal> FailedAsync(string errorCode)
-            => await Task.FromResult(new ApiResponseModal(false, errorCode));
+        public static async Task<ApiResponseModal> FailedAsync(string errorCode, ILogger logger)
+        {
+            new BaseErrorCodes().ErrorMessages.TryGetValue(errorCode, out var message);
+            logger.Fatal(message ?? "Some error occurred.", BaseErrorCodes.UnknownSystemException);
+            return await Task.FromResult(new ApiResponseModal(false, errorCode));
+        }
 
-        public static async Task<ApiResponseModal> FatalAsync(Exception exception)
-            // TODO: Log and do something with the exception
-            => await Task.FromResult(new ApiResponseModal(false, BaseErrorCodes.UnknownSystemException));
-
-        public static async Task<ApiResponseModal> FatalAsync(Exception exception, string errorCode)
-            // TODO: Log and do something with the exception
-            => await Task.FromResult(new ApiResponseModal(false, errorCode));
-
-        public static async Task<ApiResponseModal> FatalAsync(string exception)
-            // TODO: Log and do something with the exception
-            => await Task.FromResult(new ApiResponseModal(false, BaseErrorCodes.UnknownSystemException));
-
+        public static async Task<ApiResponseModal> FatalAsync(Exception exception, ILogger logger)
+        {
+            logger.Fatal(exception, BaseErrorCodes.UnknownSystemException);
+            return await Task.FromResult(new ApiResponseModal(false, BaseErrorCodes.UnknownSystemException));
+        }
+        public static async Task<ApiResponseModal> FatalAsync(Exception exception, string errorCode, ILogger logger)
+        {
+            logger.Fatal(exception, errorCode);
+            return await Task.FromResult(new ApiResponseModal(false, errorCode));
+        }
+        public static async Task<ApiResponseModal> FatalAsync(string exception, ILogger logger)
+        {
+            logger.Fatal(exception, BaseErrorCodes.UnknownSystemException);
+            return await Task.FromResult(new ApiResponseModal(false, BaseErrorCodes.UnknownSystemException));
+        }
     }
 
     public sealed class ApiResponseModal<T> : ApiResponseModal
     {
-        public T? Data { get; internal set; }
+        public T? Data { get; private set; }
 
-        public ApiResponseModal(bool succeeded, string? errorCode = null)
+        private ApiResponseModal(bool succeeded, string? errorCode = null)
             : base(succeeded, errorCode)
         {
             Data = default;
         }
 
-        public ApiResponseModal(T data, bool succeeded, string? errorCode = null)
+        private ApiResponseModal(T data, bool succeeded, string? errorCode = null)
             : base(succeeded, errorCode)
         {
             Data = data;
@@ -53,20 +63,27 @@
         public static async Task<ApiResponseModal<T>> SuccessAsync(T data)
             => await Task.FromResult(new ApiResponseModal<T>(data, true));
 
-        public static async Task<ApiResponseModal<T>> FailedAsync(string errorCode)
-            => await Task.FromResult(new ApiResponseModal<T>(false, errorCode));
-
-        public static async Task<ApiResponseModal<T>> FatalAsync(Exception exception)
-            // TODO: Log and do something with the exception
-            => await Task.FromResult(new ApiResponseModal<T>(false, BaseErrorCodes.UnknownSystemException));
-
-        public static async Task<ApiResponseModal<T>> FatalAsync(Exception exception, string errorCode)
-            // TODO: Log and do something with the exception
-            => await Task.FromResult(new ApiResponseModal<T>(false, errorCode));
-
-        public static async Task<ApiResponseModal<T>> FatalAsync(string exception)
-            // TODO: Log and do something with the exception
-            => await Task.FromResult(new ApiResponseModal<T>(false, BaseErrorCodes.UnknownSystemException));
+        public new static async Task<ApiResponseModal<T>> FailedAsync(string errorCode, ILogger logger)
+        {
+            new BaseErrorCodes().ErrorMessages.TryGetValue(errorCode, out var message);
+            logger.Fatal(message ?? "Some Error Occurred.", errorCode);
+            return await Task.FromResult(new ApiResponseModal<T>(false, errorCode));
+        }
+        public new static async Task<ApiResponseModal<T>> FatalAsync(Exception exception, ILogger logger)
+        {
+            logger.Fatal(exception, BaseErrorCodes.UnknownSystemException);
+            return await Task.FromResult(new ApiResponseModal<T>(false, BaseErrorCodes.UnknownSystemException));
+        }
+        public new static async Task<ApiResponseModal<T>> FatalAsync(Exception exception, string errorCode, ILogger logger)
+        {
+            logger.Fatal(exception, errorCode);
+            return await Task.FromResult(new ApiResponseModal<T>(false, errorCode));
+        }
+        public new static async Task<ApiResponseModal<T>> FatalAsync(string exception, ILogger logger)
+        {
+            logger.Fatal(exception, BaseErrorCodes.UnknownSystemException);
+            return await Task.FromResult(new ApiResponseModal<T>(false, BaseErrorCodes.UnknownSystemException));
+        }
 
     }
 

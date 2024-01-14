@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Hyperspan.Shared
+﻿namespace Shared
 {
     public class ApiErrorException : Exception
     {

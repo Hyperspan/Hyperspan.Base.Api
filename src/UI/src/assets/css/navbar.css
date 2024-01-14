@@ -1,0 +1,16 @@
+.navbar {
+  background-color: var(--dark);
+  box-shadow: 0px 1px 2px 1px #78777766;
+  color: var(--gray);
+  margin-bottom: 10px;
+}
+
+.navbar .nav-item .nav-link {
+  color: var(--gray);
+}
+.navbar .navbar-brand {
+  color: var(--gray-dark);
+}
+.navbar .nav-item .nav-link.active {
+  color: var(--white);
+}

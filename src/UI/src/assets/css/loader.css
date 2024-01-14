@@ -1,0 +1,39 @@
+@keyframes rotating {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loader-container {
+    top: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #00000038;
+    z-index: 99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader-container .loader-outer {
+    width: 10em;
+    height: 10em;
+    border-radius: 50%; 
+    position: relative;
+    border: 5px solid red;
+    border-left: none;
+    border-bottom: none;
+    animation: rotating 2s linear infinite;
+}
+
+
+@media (prefers-color-scheme: light) {
+    .loader-container {
+        background-color: rgba(250, 235, 215, 0.5);
+    }
+}

@@ -1,85 +1,83 @@
 {
-    "$schema": "http://json.schemastore.org/template",
-    "author": "Hyperspan",
-    "classifications": [
-        "Web",
-        "ASP.NET",
-        "Clean Architecture",
-        "Hyperspan",
-        "Api",
-        "Postgresql"
-    ],
-    "name": "Hyperspan Base API",
-    "description": "Project template for API with basic authentication and authorization.",
-    "identity": "Hyperspan.Api",
-    "groupIdentity": "Hyperspan.Api",
-    "shortName": "Hyperspan.Api",
-    "tags": {
-        "language": "C#",
-        "type": "project"
-    },
-    "sourceName": "Hyperspan",
-    "preferNameDirectory": true,
-    "symbols": {
-        "Database": {
-            "type": "parameter",
-            "datatype": "choice",
-            "choices": [
-                {
-                    "choice": "Postgres",
-                    "description": "Use Postgres Sql"
-                }
-                // ,
-                // {
-                //     "choice": "MySQL",
-                //     "description": "Use MySQL"
-                // },
-                // {
-                //     "choice": "None",
-                //     "description": "Do not configure database."
-                // }
-            ],
-            "defaultValue": "Postgres",
-            "description": "The type of database engine to use"
-        },
-        "UsePostgres": {
-            "type": "computed",
-            "value": "(Database == \"Postgres\")"
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Hyperspan",
+  "classifications": [
+    "Web",
+    "ASP.NET",
+    "Clean Architecture",
+    "Hyperspan",
+    "Api",
+    "Postgresql"
+  ],
+  "name": "Hyperspan Base API",
+  "description": "Project template for API with basic authentication and authorization.",
+  "identity": "Hyperspan.Api",
+  "groupIdentity": "Hyperspan.Api",
+  "shortName": "Hyperspan.Api",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "Hyperspan",
+  "preferNameDirectory": true,
+  "symbols": {
+    "Database": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "Postgres",
+          "description": "Use Postgres Sql"
         }
         // ,
-        // "UseMySQL": {
-        //     "type": "computed",
-        //     "value": "(Database == \"MySQL\")"
+        // {
+        //     "choice": "MySQL",
+        //     "description": "Use MySQL"
         // },
-        // "UseNone": {
-        //     "type": "computed",
-        //     "value": "(Database == \"None\")"
+        // {
+        //     "choice": "None",
+        //     "description": "Do not configure database."
         // }
+      ],
+      "defaultValue": "Postgres",
+      "description": "The type of database engine to use"
     },
-    "sources": [
-        {
-            "source": "./src",
-            "target": "./",
-            "exclude": [
-                ".template.config/**/*",
-                "templates/**/*",
-                "**/*.filelist",
-                "**/*.user",
-                "**/*.lock.json",
-                "*.nuspec",
-                "*.sln",
-                "*.exe"
-            ],
-            "rename": {
-                "README-template.md": "README.md"
-            }
-        },
-        {
-            "source": "./.github",
-            "target": "../.github",
-            "exclude": [
-                "package.yml"
-            ]
-        }
-    ]
+    "UsePostgres": {
+      "type": "computed",
+      "value": "(Database == \"Postgres\")"
+    }
+    // ,
+    // "UseMySQL": {
+    //     "type": "computed",
+    //     "value": "(Database == \"MySQL\")"
+    // },
+    // "UseNone": {
+    //     "type": "computed",
+    //     "value": "(Database == \"None\")"
+    // }
+  },
+  "sources": [
+    {
+      "source": "./src",
+      "target": "./",
+      "exclude": [
+        ".template.config/**/*",
+        "templates/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*.lock.json",
+        "*.nuspec",
+        "*.sln",
+        "*.exe"
+      ],
+      "rename": {
+        "README-template.md": "README.md"
+      }
+    },
+    {
+      "source": "./.github",
+      "target": "../.github",
+      "exclude": ["package.yml"]
+    }
+  ]
 }
