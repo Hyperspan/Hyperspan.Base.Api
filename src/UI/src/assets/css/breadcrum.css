@@ -1,0 +1,40 @@
+.breadcrum-container {
+  width: 100%;
+  height: 50px;
+}
+
+.breadcrum-list {
+  display: flex;
+  list-style: none;
+}
+
+.breadcrum-item {
+  width: fit-content;
+  margin-right: 10px;
+  color: var(--gray);
+  transition: color 10ms fade-in-out;
+  text-transform: capitalize;
+}
+
+.breadcrum-item.active {
+  width: fit-content;
+  margin-right: 10px;
+  text-decoration: underline;
+}
+
+.breadcrum-item:not(:last-child):hover {
+  width: fit-content;
+  margin-right: 10px;
+  color: white;
+  text-decoration: underline;
+}
+
+.breadcrum-item:last-child:hover {
+  width: fit-content;
+  margin-right: 10px;
+  text-decoration: underline;
+}
+
+.breadcrum-item:not(:last-child)::after {
+  content: " > ";
+}

@@ -1,10 +1,10 @@
-﻿using Hyperspan.Auth.Shared.Requests;
-using Hyperspan.Auth.Shared.Responses;
-using Hyperspan.Base.Interfaces;
-using Hyperspan.Shared.Modals;
+﻿using Infrastructure.Interfaces.User;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Modals;
+using Shared.Requests.Users;
+using Shared.Responses.Users;
 
-namespace Base.Api.Controllers
+namespace Api.Controllers
 {
     [ApiController]
     [Route("api/account/user")]
@@ -13,8 +13,9 @@ namespace Base.Api.Controllers
         private readonly IUserService _userService;
 
         public UserController(IUserService userService)
-            => _userService = userService;
-
+        {
+            this._userService = userService;
+        }
 
         [HttpPost("register")]
         public async Task<ApiResponseModal<RegisterResponse>> RegisterUserAsync(RegisterUserRequest request)
@@ -31,6 +32,5 @@ namespace Base.Api.Controllers
         [HttpPost("forget-password")]
         public async Task<ApiResponseModal> ForgetPassword(object userDetails)
             => await _userService.ForgetPassword(userDetails);
-
     }
 }

@@ -1,0 +1,41 @@
+.sidebar {
+  border-right: 1px solid #78777766;
+  height: calc(100vh - 50px);
+}
+
+.sidebar .nav-link {
+  color: var(--white);
+}
+
+.sidebar .nav-link svg + span,
+.sidebar .nav-item button svg + span {
+  margin-left: 5px;
+  align-self: baseline;
+}
+
+.sidebar .nav-item {
+  margin: 10px 0;
+}
+
+.sidebar button.nav-link.btn-light {
+  background-color: var(--white);
+  color: #3c3b3b;
+  margin-right: 16px;
+  margin-left: 16px;
+}
+
+.sidebar .nav-item > button {
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.sidebar .progress {
+  width: 90%;
+  height: 5px;
+  margin-top: 15px;
+  margin-left: 16px;
+}
+
+.sidebar .progress .progress-bar {
+  background-color: var(--primary);
+}

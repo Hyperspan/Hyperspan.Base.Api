@@ -5,7 +5,7 @@ global using System.Collections.Generic;
 global using System.Threading.Tasks;
 
 
-namespace Hyperspan.Shared
+namespace Shared
 {
     public class BaseErrorCodes
     {
@@ -14,7 +14,7 @@ namespace Hyperspan.Shared
             ErrorMessages = _baseErrorMessages;
         }
 
-        protected internal IDictionary<string, string> _baseErrorMessages = new Dictionary<string, string>
+        protected IDictionary<string, string> _baseErrorMessages = new Dictionary<string, string>
         {
             #region 00 System
 
@@ -40,24 +40,20 @@ namespace Hyperspan.Shared
 
             #region 02 Database
 
-            { NullConnectionString, "The connection string passed was null." },
+            { NullConnectionString, "Could not connect to the database." },
             { InsertFailed, "Failed to Insert into database." },
             { UpdateFailed, "Failed to Update into database." },
             { DeleteFailed, "Failed to Delete from database." },
             { QueryFailed, "Failed to Query into database." },
             { InvalidId, "The Id passed is invalid." },
             { RecordNotFound, "Record was not found." },
+            { DatabaseUnknownError, "Some problem occurred with our database systems." },
 
             #endregion
 
-            #region 03 Settings
+            { FileNotFound, "Requested file was not found in the file system." },
+            { FileNotPlayable, "Requested file could not be played at the moment." },
 
-            { SettingNotFound, "The setting requested does not exists." },
-            { SettingTypeInvalid, "The setting type is invalid." },
-            { ModulesNotPassed, "No Module details found in request." },
-            { FieldsNotPassed, "No Field details found in request." },
-
-            #endregion
         };
 
         public IDictionary<string, string> ErrorMessages { get; protected set; }
@@ -84,6 +80,7 @@ namespace Hyperspan.Shared
 
         #region 02 Database
 
+        public const string DatabaseUnknownError = "02DB000";
         public const string NullConnectionString = "02DB001";
         public const string InsertFailed = "02DB002";
         public const string UpdateFailed = "02DB003";
@@ -95,15 +92,7 @@ namespace Hyperspan.Shared
 
         #endregion
 
-
-        #region 03 Settings
-
-        public const string SettingNotFound = "03SET001";
-        public const string SettingTypeInvalid = "03SET002";
-        public const string ModulesNotPassed = "03SET003";
-        public const string FieldsNotPassed = "03SET004";
-
-        #endregion
-
+        public const string FileNotFound = "03DRV001";
+        public const string FileNotPlayable = "03DRV002";
     }
 }

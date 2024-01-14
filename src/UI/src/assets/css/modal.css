@@ -1,0 +1,49 @@
+.modal {
+    color: black;
+    background-color: #000000aa;
+}
+
+.modal-dialog {
+    top: 10vh;
+}
+
+.modal-primary .modal-header {
+    background-color: var(--bs-primary);
+    color: white;
+}
+
+.modal-secondary .modal-header {
+    background-color: var(--bs-secondary);
+    color: white;
+}
+
+.modal-success .modal-header {
+    background-color: var(--bs-success);
+    color: white;
+}
+
+.modal-danger .modal-header {
+    background-color: var(--bs-danger);
+    color: white;
+}
+
+.modal-warning .modal-header {
+    background-color: var(--bs-warning);
+    color: white;
+}
+
+.modal-info .modal-header {
+    background-color: var(--bs-info);
+}
+
+
+.modal-dark .modal-header {
+    background-color: var(--bs-dark);
+    color: white;
+}
+
+.modal-dark .modal-header .btn-close {
+    height: 10px;
+    width: 10px;
+}
+
