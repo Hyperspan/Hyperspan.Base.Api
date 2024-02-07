@@ -10,7 +10,6 @@ using Shared.Modals;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Serilog;
 using Shared.Enums.Users;
 using Shared.Requests.Users;
 using Shared.Responses.Users;
@@ -22,18 +21,15 @@ namespace Infrastructure.Services.User
         private readonly UserManager<ApplicationUser<Guid>> _userManager;
         private readonly IEmailService _emailService;
         private readonly AppConfiguration _appConfig;
-        private readonly ILogger _logger;
 
         public UserService(
             UserManager<ApplicationUser<Guid>> userManager,
             IEmailService emailService,
-            IOptions<AppConfiguration> options,
-            ILogger logger)
+            IOptions<AppConfiguration> options)
         {
             _userManager = userManager;
             _emailService = emailService;
             _appConfig = options.Value;
-            _logger = logger;
         }
 
 
@@ -55,7 +51,7 @@ namespace Infrastructure.Services.User
                 {
                     // Return if is an existing user
                     return await ApiResponseModal<RegisterResponse>.FatalAsync(
-                        new ApiErrorException(BaseErrorCodes.EmailTaken), BaseErrorCodes.EmailTaken, _logger);
+                        new ApiErrorException(BaseErrorCodes.EmailTaken), BaseErrorCodes.EmailTaken);
                 }
 
                 // create user's record
@@ -97,7 +93,7 @@ namespace Infrastructure.Services.User
             }
             catch (ApiErrorException e)
             {
-                return await ApiResponseModal<RegisterResponse>.FatalAsync(e, e.ErrorCode, _logger);
+                return await ApiResponseModal<RegisterResponse>.FatalAsync(e, e.ErrorCode);
             }
         }
 
@@ -160,12 +156,11 @@ namespace Infrastructure.Services.User
             }
             catch (ApiErrorException e)
             {
-                return await ApiResponseModal<LoginResponse>.FatalAsync(e, _logger);
+                return await ApiResponseModal<LoginResponse>.FatalAsync(e);
             }
             catch (Exception e)
             {
-                return await ApiResponseModal<LoginResponse>.FatalAsync(e, BaseErrorCodes.UnknownSystemException,
-                    _logger);
+                return await ApiResponseModal<LoginResponse>.FatalAsync(e, BaseErrorCodes.UnknownSystemException);
             }
         }
 

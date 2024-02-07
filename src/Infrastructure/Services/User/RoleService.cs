@@ -62,7 +62,7 @@ namespace Infrastructure.Services.User
             }
             catch (ApiErrorException e)
             {
-                return await ApiResponseModal.FatalAsync(e, BaseErrorCodes.UnknownSystemException, _logger);
+                return await ApiResponseModal.FatalAsync(e, BaseErrorCodes.UnknownSystemException);
             }
         }
 
@@ -83,7 +83,7 @@ namespace Infrastructure.Services.User
             catch (ApiErrorException e)
             {
                 return await ApiResponseModal<List<ApplicationRole<Guid>>>.FatalAsync(e,
-                    BaseErrorCodes.UnknownSystemException, _logger);
+                    BaseErrorCodes.UnknownSystemException);
             }
         }
 
@@ -103,8 +103,7 @@ namespace Infrastructure.Services.User
             var result = await _userManager.AddToRoleAsync(user, role.Name);
 
             if (result is not { Succeeded: true })
-                return await ApiResponseModal<ApplicationRole<Guid>>.FailedAsync(BaseErrorCodes.UnknownSystemException,
-                    _logger);
+                return await ApiResponseModal<ApplicationRole<Guid>>.FailedAsync(BaseErrorCodes.UnknownSystemException);
 
             return await ApiResponseModal<ApplicationRole<Guid>>.SuccessAsync(role);
         }
@@ -127,7 +126,7 @@ namespace Infrastructure.Services.User
                 if (userRoles == null)
                 {
                     return await ApiResponseModal<List<ApplicationRole<Guid>>>.FailedAsync(
-                        BaseErrorCodes.UnknownSystemException, _logger);
+                        BaseErrorCodes.UnknownSystemException);
                 }
 
                 // Init a new role list
@@ -165,7 +164,7 @@ namespace Infrastructure.Services.User
 
             // Throw/ return errors 
             if (userRole is not { Succeeded: true })
-                return await ApiResponseModal.FailedAsync(BaseErrorCodes.UnknownSystemException, _logger);
+                return await ApiResponseModal.FailedAsync(BaseErrorCodes.UnknownSystemException);
 
             return await ApiResponseModal.SuccessAsync();
         }

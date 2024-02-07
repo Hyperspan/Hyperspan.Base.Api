@@ -1,7 +1,6 @@
 ﻿using System.Net;
 using System.Text.Json;
 using MySqlConnector;
-using Serilog;
 using Shared;
 using Shared.Modals;
 
@@ -16,11 +15,6 @@ public class ErrorHandlerMiddleware
         this._next = next;
     }
     
-    private readonly Serilog.ILogger _logger = new LoggerConfiguration()
-        .WriteTo.File("Logs/Logs.txt", rollingInterval: RollingInterval.Day)
-        .WriteTo.Console()
-        .CreateLogger();
-
     public async Task Invoke(HttpContext context)
     {
         try
@@ -31,7 +25,7 @@ public class ErrorHandlerMiddleware
         {
             var response = context.Response;
             response.ContentType = "application/json";
-            var responseModel = await ApiResponseModal<object>.FatalAsync(error, BaseErrorCodes.UnknownSystemException, _logger);
+            var responseModel = await ApiResponseModal<object>.FatalAsync(error, BaseErrorCodes.UnknownSystemException);
 
             switch (error)
             {
@@ -42,7 +36,7 @@ public class ErrorHandlerMiddleware
 
                 case MySqlException e:
                     responseModel =
-                        await ApiResponseModal<object>.FatalAsync(e, BaseErrorCodes.DatabaseUnknownError, _logger);
+                        await ApiResponseModal<object>.FatalAsync(e, BaseErrorCodes.DatabaseUnknownError);
                     break;
 
                 case KeyNotFoundException:

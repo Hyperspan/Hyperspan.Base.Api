@@ -16,10 +16,6 @@ namespace Api.Controllers
         {
             _roleService = roleService;
         }
-        
-        //[HttpPost]
-        //public async Task<ApiResponseModal> CreateRoleAsync(CreateRoleRequest request)
-        //    => await _roleService.CreateRoleAsync(request);
 
         [HttpGet]
         public async Task<ApiResponseModal<List<ApplicationRole<Guid>>>> ListAllRolesAsync()

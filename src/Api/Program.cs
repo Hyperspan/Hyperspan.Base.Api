@@ -48,7 +48,7 @@ try
     builder.Services.Configure<AppConfiguration>(appConfigSection);
     
     if (connectionString == null) throw new ApiErrorException(BaseErrorCodes.NullConnectionString);
-    builder.Services.AddDbService(connectionString.DbConnection);
+    builder.Services.AddMySqlDbService(connectionString.DbConnection);
 
     var emailConfig = builder.Configuration.GetSection(EmailConfig.SectionLabel);
     builder.Services.Configure<EmailConfig>(emailConfig);
