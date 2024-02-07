@@ -20,26 +20,26 @@ namespace Shared.Modals
         public static async Task<ApiResponseModal> SuccessAsync()
             => await Task.FromResult(new ApiResponseModal(true));
 
-        public static async Task<ApiResponseModal> FailedAsync(string errorCode, ILogger logger)
+        public static async Task<ApiResponseModal> FailedAsync(string errorCode)
         {
             new BaseErrorCodes().ErrorMessages.TryGetValue(errorCode, out var message);
-            logger.Fatal(message ?? "Some error occurred.", BaseErrorCodes.UnknownSystemException);
+            Log.Fatal(message ?? "Some error occurred.", BaseErrorCodes.UnknownSystemException);
             return await Task.FromResult(new ApiResponseModal(false, errorCode));
         }
 
-        public static async Task<ApiResponseModal> FatalAsync(Exception exception, ILogger logger)
+        public static async Task<ApiResponseModal> FatalAsync(Exception exception)
         {
-            logger.Fatal(exception, BaseErrorCodes.UnknownSystemException);
+            Log.Fatal(exception, BaseErrorCodes.UnknownSystemException);
             return await Task.FromResult(new ApiResponseModal(false, BaseErrorCodes.UnknownSystemException));
         }
-        public static async Task<ApiResponseModal> FatalAsync(Exception exception, string errorCode, ILogger logger)
+        public static async Task<ApiResponseModal> FatalAsync(Exception exception, string errorCode)
         {
-            logger.Fatal(exception, errorCode);
+            Log.Fatal(exception, errorCode);
             return await Task.FromResult(new ApiResponseModal(false, errorCode));
         }
-        public static async Task<ApiResponseModal> FatalAsync(string exception, ILogger logger)
+        public static async Task<ApiResponseModal> FatalAsync(string exception)
         {
-            logger.Fatal(exception, BaseErrorCodes.UnknownSystemException);
+            Log.Fatal(exception, BaseErrorCodes.UnknownSystemException);
             return await Task.FromResult(new ApiResponseModal(false, BaseErrorCodes.UnknownSystemException));
         }
     }
@@ -63,25 +63,25 @@ namespace Shared.Modals
         public static async Task<ApiResponseModal<T>> SuccessAsync(T data)
             => await Task.FromResult(new ApiResponseModal<T>(data, true));
 
-        public new static async Task<ApiResponseModal<T>> FailedAsync(string errorCode, ILogger logger)
+        public new static async Task<ApiResponseModal<T>> FailedAsync(string errorCode)
         {
             new BaseErrorCodes().ErrorMessages.TryGetValue(errorCode, out var message);
-            logger.Fatal(message ?? "Some Error Occurred.", errorCode);
+            Log.Fatal(message ?? "Some Error Occurred.", errorCode);
             return await Task.FromResult(new ApiResponseModal<T>(false, errorCode));
         }
-        public new static async Task<ApiResponseModal<T>> FatalAsync(Exception exception, ILogger logger)
+        public new static async Task<ApiResponseModal<T>> FatalAsync(Exception exception)
         {
-            logger.Fatal(exception, BaseErrorCodes.UnknownSystemException);
+            Log.Fatal(exception, BaseErrorCodes.UnknownSystemException);
             return await Task.FromResult(new ApiResponseModal<T>(false, BaseErrorCodes.UnknownSystemException));
         }
-        public new static async Task<ApiResponseModal<T>> FatalAsync(Exception exception, string errorCode, ILogger logger)
+        public new static async Task<ApiResponseModal<T>> FatalAsync(Exception exception, string errorCode)
         {
-            logger.Fatal(exception, errorCode);
+            Log.Fatal(exception, errorCode);
             return await Task.FromResult(new ApiResponseModal<T>(false, errorCode));
         }
-        public new static async Task<ApiResponseModal<T>> FatalAsync(string exception, ILogger logger)
+        public new static async Task<ApiResponseModal<T>> FatalAsync(string exception)
         {
-            logger.Fatal(exception, BaseErrorCodes.UnknownSystemException);
+            Log.Fatal(exception, BaseErrorCodes.UnknownSystemException);
             return await Task.FromResult(new ApiResponseModal<T>(false, BaseErrorCodes.UnknownSystemException));
         }
 

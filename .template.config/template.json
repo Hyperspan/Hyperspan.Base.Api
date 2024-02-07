@@ -28,16 +28,19 @@
         {
           "choice": "Postgres",
           "description": "Use Postgres Sql"
+        },
+        {
+          "choice": "MySQL",
+          "description": "Use MySQL"
+        },
+        {
+          "choice": "SQLServer",
+          "description": "Use SQL Server"
+        },
+        {
+          "choice": "None",
+          "description": "Do not configure database."
         }
-        // ,
-        // {
-        //     "choice": "MySQL",
-        //     "description": "Use MySQL"
-        // },
-        // {
-        //     "choice": "None",
-        //     "description": "Do not configure database."
-        // }
       ],
       "defaultValue": "Postgres",
       "description": "The type of database engine to use"
@@ -45,16 +48,19 @@
     "UsePostgres": {
       "type": "computed",
       "value": "(Database == \"Postgres\")"
+    },
+    "UseSQLServer": {
+      "type": "computed",
+      "value": "(Database == \"SQLServer\")"
+    },
+    "UseMySQL": {
+      "type": "computed",
+      "value": "(Database == \"MySQL\")"
+    },
+    "UseNone": {
+      "type": "computed",
+      "value": "(Database == \"None\")"
     }
-    // ,
-    // "UseMySQL": {
-    //     "type": "computed",
-    //     "value": "(Database == \"MySQL\")"
-    // },
-    // "UseNone": {
-    //     "type": "computed",
-    //     "value": "(Database == \"None\")"
-    // }
   },
   "sources": [
     {

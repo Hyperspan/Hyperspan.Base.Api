@@ -6,9 +6,9 @@ using Shared;
 
 namespace Domain
 {
-    public static class ServiceExtensions
+    public  static class MySqlServiceExtensions
     {
-        public static void AddDbService(this IServiceCollection serviceCollection, string connectionString)
+        public static void AddMySqlDbService(this IServiceCollection serviceCollection, string connectionString)
         {
             serviceCollection.AddDbContext<Context>(builder =>
                 GetDbContextOptions(builder, connectionString));
