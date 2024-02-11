@@ -64,7 +64,7 @@
   },
   "sources": [
     {
-      "source": "./src",
+      "source": "src",
       "target": "./",
       "exclude": [
         ".template.config/**/*",
@@ -78,7 +78,39 @@
       ],
       "rename": {
         "README-template.md": "README.md"
-      }
+      },
+      "modifiers": [
+        {
+          "condition": "(UsePostgres)",
+          "exclude": [
+            "src/Domain/MySql-ServiceExtension.cs",
+            "src/Domain/SqlServer-ServiceExtension.cs"
+          ],
+          "rename": {
+            "Postgres-ServiceExtension.cs": "ServiceExtension.cs"
+          }
+        },
+        {
+          "condition": "(UseSQLServer)",
+          "exclude": [
+            "src/Domain/MySql-ServiceExtension.cs",
+            "src/Domain/Postgres-ServiceExtension.cs"
+          ],
+          "rename": {
+            "SqlServer-ServiceExtension.cs": "ServiceExtension.cs"
+          }
+        },
+        {
+          "condition": "(UseMySQL)",
+          "exclude": [
+            "src/Domain/MySql-ServiceExtension.cs",
+            "src/Domain/SqlServer-ServiceExtension.cs"
+          ],
+          "rename": {
+            "MySql-ServiceExtension.cs": "ServiceExtension.cs"
+          }
+        }
+      ]
     },
     {
       "source": "./.github",

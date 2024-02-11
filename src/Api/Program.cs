@@ -36,20 +36,37 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
+
+    // Identity configuration
+    builder.Services
+        .AddIdentity<ApplicationUser<Guid>, ApplicationRole<Guid>>(options =>
+        {
+            options.Password.RequireDigit = false;
+            options.Password.RequireLowercase = false;
+            options.Password.RequireNonAlphanumeric = false;
+            options.Password.RequireUppercase = false;
+            options.User.RequireUniqueEmail = true;
+        })
+        .AddRoles<ApplicationRole<Guid>>()
+        .AddEntityFrameworkStores<Context>()
+        .AddDefaultTokenProviders();
+
     // For using Authorization
     builder.Services.AddAuthorization();
 
     var connectionSection = builder.Configuration.GetSection(ConnectionString.Label);
     var connectionString = connectionSection.Get<ConnectionString>();
     builder.Services.Configure<ConnectionString>(connectionSection);
-    
+
     var appConfigSection = builder.Configuration.GetSection(AppConfiguration.Label);
     var appConfig = appConfigSection.Get<AppConfiguration>();
     builder.Services.Configure<AppConfiguration>(appConfigSection);
-    
-    if (connectionString == null) throw new ApiErrorException(BaseErrorCodes.NullConnectionString);
-    builder.Services.AddMySqlDbService(connectionString.DbConnection);
 
+    if (connectionString == null) throw new ApiErrorException(BaseErrorCodes.NullConnectionString);
+        $if$($featureChoice$ == "Feature1")
+    {
+        builder.Services.AddMySqlDbService(connectionString.DbConnection);
+    }
     var emailConfig = builder.Configuration.GetSection(EmailConfig.SectionLabel);
     builder.Services.Configure<EmailConfig>(emailConfig);
     builder.Services.AddEmailService();
@@ -69,28 +86,13 @@ try
                 .AllowCredentials();
         });
     });
-    
+
     builder.Services.Configure<FormOptions>(options =>
     {
         options.ValueLengthLimit = int.MaxValue;
         options.MultipartBodyLengthLimit = long.MaxValue;
         options.MultipartHeadersLengthLimit = int.MaxValue;
     });
-
-    // Identity configuration
-    builder.Services
-        .AddIdentity<ApplicationUser<Guid>, ApplicationRole<Guid>>(options =>
-        {
-            options.Password.RequireDigit = false;
-            options.Password.RequireLowercase = false;
-            options.Password.RequireNonAlphanumeric = false;
-            options.Password.RequireUppercase = false;
-            options.User.RequireUniqueEmail = true;
-        })
-        .AddRoles<ApplicationRole<Guid>>()
-        .AddEntityFrameworkStores<Context>()
-        .AddDefaultTokenProviders();
-
 
     builder.Host.UseSerilog(Log.Logger);
     var app = builder.Build();
